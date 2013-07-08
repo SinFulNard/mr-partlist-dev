@@ -1,33 +1,40 @@
-<%= form_for(@part) do |f| %>
-  <% if @part.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@part.errors.count, "error") %> prohibited this part from being saved:</h2>
+<%= form_for @part, html: { class: 'form-horizontal' } do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 
-      <ul>
-      <% @part.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <div class="control-group">
+    <%= f.label :name, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, class: 'text_field' %>
+      <span class="help-inline">enter the part name</span>
     </div>
-  <% end %>
+  </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="control-group">
+    <%= f.label :quantity, class: 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :quantity, class: 'number_field' %>
+      <span class="help-inline">enter the quantity of this part</span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :quantity %><br />
-    <%= f.number_field :quantity %>
+
+  <div class="control-group">
+    <%= f.label :link, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :link, class: 'text_field' %>
+      <span class="help-inline">optional link to your part</span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :link %><br />
-    <%= f.text_field :link %>
+
+  <div class="control-group">
+    <%= f.label :cost, class: 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :cost, class: 'number_field' %>
+      <span class="help-inline">enter the single cost of this part</span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :cost %><br />
-    <%= f.number_field :cost %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), part_path(@part), :class => 'btn' %>
   </div>
 <% end %>
