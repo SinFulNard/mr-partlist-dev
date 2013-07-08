@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :build_link, :image_link, :name, :video_link, :category_id
+  attr_accessible :build_link, :image_link, :name, :video_link, :category_id, :user_id
   before_save :test_project_links
 
   validates :name, presence: true, length: { maximum: 50 },uniqueness: { case_sensitive: false }

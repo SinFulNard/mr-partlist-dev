@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project = Project.find(params[:id])
+    @project = Project.find_by_name(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @project = Project.find(params[:id])
+    @project = Project.find_by_name(params[:id])
   end
 
   # POST /projects
@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to project_path(@project.name), notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new" }
@@ -61,7 +61,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to project_path(@project.name), notice: 'Project was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -77,8 +77,17 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     respond_to do |format|
-      format.html { redirect_to projects_url }
+      format.html { redirect_to all_path }
       format.json { head :no_content }
+    end
+  end
+
+  def vote_up
+    begin
+      current_user.vote_for(@project = Project.find(params[:id]))
+      redirect_to :back, notice: 'Thanks for your vote.'
+    rescue ActiveRecord::RecordInvalid
+      redirect_to all_path, notice: 'VOTE ERROR: CANNOT COMPUTE'
     end
   end
 end
