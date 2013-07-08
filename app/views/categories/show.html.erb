@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @category.name %>
-</p>
+<% if !@projects.empty? %>
+	<%= render partial: 'shared/show_projects', collection: @projects %>
+<% else %>
+	<div class="alert alert-warning">
+		Sorry, there are no projects under this category yet.
+	</div>
+<% end %>
 
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>

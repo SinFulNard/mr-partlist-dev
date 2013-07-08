@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+	  before_filter :admin_user, only: [:index, :update, :create, :new, :destroy]
+
   # GET /categories
   # GET /categories.json
   def index
@@ -14,6 +16,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     @category = Category.find_by_name(params[:id])
+		@projects = Project.where("category_id =?", @category.id)
 
 		project_by_category = Project.where("category_id =?", @category.id)
 
@@ -46,7 +49,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
+        format.html { redirect_to :back, notice: 'Category was successfully created.' }
         format.json { render json: @category, status: :created, location: @category }
       else
         format.html { render action: "new" }

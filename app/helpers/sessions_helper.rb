@@ -60,7 +60,9 @@ module SessionsHelper
   end
 
 	def admin_in?
-		current_user.admin?
+    if signed_in?
+			current_user.admin?
+		end
 	end
 
 	def admin_user
