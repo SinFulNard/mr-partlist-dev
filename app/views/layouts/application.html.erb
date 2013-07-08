@@ -25,7 +25,7 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Explore<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li class="nav-header">Multi-rotors</li>
-									<li><%= link_to "All multi-rotors", "#" %></li>
+									<li><%= link_to "All multi-rotors", all_path %></li>
 									<li class="divider"></li>
                   <li class="nav-header">Categories</li>
 									<% for categories in 1..Category.all.count %>
@@ -33,10 +33,39 @@
 										<li><a href="/categories/<%= category.name %>"><%= category.name %></a></li>
 									<% end %>
 									</li>
+									<% if signed_in? %>
+										<li class="divider"></li>
+	                  <li class="nav-header"><%= current_user.name %></li>
+										<li><%= link_to "My projects", current_user %>
+									<% end %>
 								</ul>
 							</li>
+
+							<% if signed_in? %>
+								<% if admin_in? %>
+									<li><%= link_to "Categories", categories_path %>
+								<% end %>
+								<li><%= link_to "New Project", new_project_path %></li>
+								<li><%= link_to current_user.name, current_user %>
+								<li><%= link_to "Sign out", signout_path, method: "delete" %> </li>
+							<% else %>
+								<li id="fat-menu" class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li>
+											<%= simple_form_for :session, url: sessions_path do |f| %>
+												<%= f.input :name, label: false, wrapper_html: { id: "nameInput", class: "signInDrop" } %>
+												<%= f.input :password, label: false, wrapper_html: { id: "passInput", class: "signInDrop" } %>
+											  <%= f.button :submit, "Sign in", class: "btn-small loginbtn" %>
+											<% end %>
+										</li>
+										<center><font size="1">Sorry, no password recovery.</font></center>
+									</ul>
+								</li>
 								<li><%= link_to "New Project", new_project_path %></li>
                 <li><%= link_to "FAQ", 'faq' %></li>
+								<li><%= link_to "Sign up", signup_path %></li>
+							<% end %>
 						</ul>
 					</ul>
 				</div>

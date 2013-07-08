@@ -2,6 +2,11 @@
 	<h1>New project</h1>
 </div>
 
+<% if !signed_in? %>
+	<div class= "alert alert-error">
+		<strong>Warning:</strong> you are creating a project without an associated account. This means you won't be able to edit or delete your project once its created. Sign up if you would like to edit/delete projects you create.
+	</div>
+<% end %>
+
 <%= render 'form' %>
 
-<%= link_to 'Back', projects_path %>

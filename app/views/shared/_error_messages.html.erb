@@ -3,10 +3,11 @@
     <p>
       <strong>Hold on there!</strong> Looks like you might have missed something.
     </p>
-      The form contains <%= pluralize(object.errors.count, "error") %>.
+	</div>
+  <div class="alert alert-warning">
     <ul>
     <% object.errors.full_messages.each do |msg| %>
-      <li>* <%= msg %></li>
+      <li><%= msg %></li>
     <% end %>
     </ul>
   </div>

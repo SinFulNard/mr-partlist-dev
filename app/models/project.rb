@@ -1,13 +1,17 @@
 class Project < ActiveRecord::Base
-  attr_accessible :build_link, :image_link, :name, :video_link
-  before_save :test_quad_links
+  attr_accessible :build_link, :image_link, :name, :video_link, :category_id
+  before_save :test_project_links
 
   validates :name, presence: true, length: { maximum: 50 },uniqueness: { case_sensitive: false }
   validates :category_id, presence: true
   belongs_to :category
+  belongs_to :user
+  has_many :parts
+
+  acts_as_voteable
 
   private
-    def test_quad_links
+    def test_project_links
       if (!(self.video_link.downcase.include? "http://") && !(self.video_link == ""))
         self.video_link = self.video_link.insert 0, "http://"
       end

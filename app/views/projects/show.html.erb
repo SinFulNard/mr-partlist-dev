@@ -1,25 +1,4 @@
-<p id="notice"><%= notice %></p>
+<center><p id="notice"><%= notice %></p></center>
 
-<p>
-  <b>Name:</b>
-  <%= @project.name %>
-</p>
+<%= render partial: 'shared/show_projects', object: @project %>
 
-<p>
-  <b>Build link:</b>
-  <%= @project.build_link %>
-</p>
-
-<p>
-  <b>Video link:</b>
-  <%= @project.video_link %>
-</p>
-
-<p>
-  <b>Image link:</b>
-  <%= @project.image_link %>
-</p>
-
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>

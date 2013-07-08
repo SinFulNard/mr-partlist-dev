@@ -1,0 +1,11 @@
+<h3>Sign in</h3>
+
+<%= simple_form_for(:session, url: sessions_path, html: { class: 'form-horizontal'}) do |f| %>
+  <%= f.input :name, label: 'Username' %>
+  <%= f.input :password, label: 'Password' %>
+
+  <%= f.button :submit, "Sign in", class: "btn btn-small" %>
+<% end %>
+
+<p>New user? <%= link_to "Sign up instead!", signup_path %></p>
+

@@ -11,7 +11,7 @@
   <div class="control-group">
     <%= f.label :category_id, :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:quad, :category_id, Category.all, :id, :name) %>
+      <%= collection_select(:project, :category_id, Category.all, :id, :name) %>
       <span class="help-inline">select a category for your project</span>
     </div>
   </div>

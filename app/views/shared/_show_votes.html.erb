@@ -1,0 +1,13 @@
+Votes:
+<br>
+<% if signed_in? %>
+	<% if current_user.voted_for?(show_projects) %>
+		<font color="blue"><i class="icon-thumbs-up icon-large"></i></font>
+	<% else %>
+		<%= link_to raw('<i class="icon-thumbs-up"></i>'), vote_up_project_path(show_projects), method: :post %>
+	<% end %>
+<% else %>
+	<%= link_to raw('<i class="icon-thumbs-up"></i>'), "#", title: "Sign-in to vote", class: "long-name" %>
+<% end %>
+
+<%= show_projects.votes_for %> 

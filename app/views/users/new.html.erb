@@ -1,0 +1,33 @@
+<div class="page-header">
+	<h1>New user</h1>
+</div>
+
+<%= form_for @user, html: { class: 'form-horizontal' } do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="control-group">
+    <%= f.label :name, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, class: 'text_field' %>
+      <span class="help-inline">One word, no special characters please.</span>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password, class: 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password, class: 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password_confirmation, class: 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password_confirmation, class: 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn' %>
+  </div>
+<% end %>

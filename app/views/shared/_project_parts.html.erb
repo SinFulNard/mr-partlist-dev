@@ -1,0 +1,22 @@
+<% if project_parts.name.length > 40 then
+	part_name = project_parts.name[0..33]
+	tool_tip_name = project_parts.name
+else
+	part_name = project_parts.name
+end %>
+
+<p>
+	<% if current_user?(Project.find_by_id(project_parts.project_id).user) %>
+		<%= link_to raw('<font color="red"><i class="icon-wrench"></i></font>'), edit_part_path(project_parts) %>
+    <%= link_to raw('<font color="red"><i class="icon-trash"></i></font>'), project_parts, method: :delete, data: { confirm: "You sure?" }, title: "Delete this part", class: "delete" %>
+		|
+	<% end %>
+
+  <%= project_parts.quantity %> x <%= link_to part_name, project_parts.link %>
+	<% if !tool_tip_name.nil? %>
+		<%= link_to ".....", project_parts.link, title: tool_tip_name, class: "long-name" %>
+	<% end %>
+	<font id="floatRight">
+		$<%= project_parts.cost * project_parts.quantity %>
+	</font>
+</p>

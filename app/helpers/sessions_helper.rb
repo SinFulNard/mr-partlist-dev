@@ -19,7 +19,9 @@ module SessionsHelper
   end
 
   def current_user?(user)
-    user == current_user
+		if signed_in?
+	    user == current_user
+		end
   end
 
   def signed_in?

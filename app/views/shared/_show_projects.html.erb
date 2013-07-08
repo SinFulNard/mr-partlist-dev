@@ -1,0 +1,94 @@
+<div class="capsule span6">
+	<p>
+		<div class="row">
+			<div class="span4">
+				<strong><font size="4">
+					<%= link_to show_projects.name, project_path(show_projects.name) %>
+				</font></strong>
+				<% if show_projects.user %>
+					by <%= link_to show_projects.user.name, show_projects.user %>
+				<% end %>
+			</div>
+			<div class="span2">
+				<strong id="floatRight">
+					<%= link_to show_projects.category.name, category_path(show_projects.category.name) %>
+				</strong>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<% if !(show_projects.parts.empty?) %>
+				<div class="span4 part">
+					<%= render partial: 'shared/project_parts', collection: show_projects.parts %>
+			<% else %>
+				<div class="span4 part empty">
+					<strong>This project has no parts.</strong>
+			<% end %>
+				<% if current_user?(show_projects.user) %>
+					<p class="addButton"><i class="icon-plus-sign-alt"></i> Add part</p>
+					<div class="addField">
+			    	<%= form_for :part, action: 'new', url: parts_path do |f| %>
+							<%= f.text_field :name, placeholder: "Part name" %>
+              <br>
+              <%= f.text_field :link, placeholder: "Link to part" %>
+              <%= f.number_field :cost, placeholder: "Individual part cost" %>
+			   	 		<br>
+			   	 		<%= f.number_field :quantity, placeholder: "Quantity" %>
+              <br>
+			   	 		<%= f.hidden_field :project_id, value: show_projects.id %>
+			  	 		<%= f.submit "Add", class: "btn-mini" %>
+				  	<% end %>
+					</div>
+				<% end %>
+			</div>
+			<div class ="span1">
+				<div class="span1 sidebar">
+					Cost:
+					<br>
+						<% total_cost = 0 %>
+						<% show_projects.parts.each do |f| %>
+							<% part_cost = f.cost * f.quantity %>
+							<% total_cost += part_cost %>
+						<% end %>
+						$<%= total_cost %>
+					<br>
+					<%= render partial: 'shared/show_votes', locals: { show_projects: show_projects} %>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+			<i class="icon-camera"></i> 
+			<% if !(show_projects.image_link == "") %>
+				<%= link_to "Images", show_projects.image_link, target: "_blank" %>
+			<% else %>
+				No images
+			<% end %>
+			<i class="icon-film"></i> 
+      <% if !(show_projects.video_link == "") %>
+				<%= link_to "Videos", show_projects.video_link, target: "_blank" %>
+			<% else %>
+				No videos
+      <% end %>
+			<i class="icon-wrench"></i> 
+      <% if !(show_projects.build_link == "") %>
+				<%= link_to "Build log", show_projects.build_link, target: "_blank" %>
+			<% else %>
+				No build log
+      <% end %>
+			</div>
+			<div class="span2">
+			<% if current_user?(show_projects.user) %>
+				<div id="floatRight">
+					<font color="red">
+						<i class="icon-cogs"></i>
+						<%= link_to "Edit", edit_project_path(show_projects.name) %>
+		        <i class="icon-trash"></i>
+  	        <%= link_to "Delete", project_path(show_projects), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }%>
+					</font>
+				</div>
+			<% end %>
+			</div>
+    </div>
+	</p>
+</div>
