@@ -12,7 +12,12 @@ end %>
 		|
 	<% end %>
 
-  <%= project_parts.quantity %> x <%= link_to part_name, project_parts.link %>
+  <%= project_parts.quantity %> x 
+	<% if project_parts.link == "" %>
+		<%= part_name %>
+	<% else %>
+		<%= link_to part_name, project_parts.link %>
+	<% end %>
 	<% if !tool_tip_name.nil? %>
 		<%= link_to ".....", project_parts.link, title: tool_tip_name, class: "long-name" %>
 	<% end %>
