@@ -58,23 +58,17 @@
 		</div>
 		<div class="row">
 			<div class="span4">
-			<i class="icon-camera"></i> 
 			<% if !(show_projects.image_link == "") %>
+				<i class="icon-camera"></i> 
 				<%= link_to "Images", show_projects.image_link, target: "_blank" %>
-			<% else %>
-				No images
 			<% end %>
-			<i class="icon-film"></i> 
       <% if !(show_projects.video_link == "") %>
+				<i class="icon-film"></i> 
 				<%= link_to "Videos", show_projects.video_link, target: "_blank" %>
-			<% else %>
-				No videos
       <% end %>
-			<i class="icon-wrench"></i> 
       <% if !(show_projects.build_link == "") %>
+				<i class="icon-wrench"></i> 
 				<%= link_to "Build log", show_projects.build_link, target: "_blank" %>
-			<% else %>
-				No build log
       <% end %>
 			</div>
 			<div class="span2">
