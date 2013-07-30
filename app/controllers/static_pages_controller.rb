@@ -3,7 +3,8 @@ class StaticPagesController < ApplicationController
   end
 
 	def all
-		@projects = Project.all.reverse
+		#@projects = Project.all.reverse
+		@projects = Project.paginate(page: params[:page], per_page: 30)
 	end
 
   def help
