@@ -6,7 +6,7 @@ else
 end %>
 
 <p>
-	<% if current_user?(Project.find_by_id(project_parts.project_id).user) %>
+	<% if current_user?(Project.find_by_id(project_parts.project_id)) %>
 		<%= link_to raw('<font color="red"><i class="icon-wrench"></i></font>'), edit_part_path(project_parts) %>
     <%= link_to raw('<font color="red"><i class="icon-trash"></i></font>'), project_parts, method: :delete, data: { confirm: "You sure?" }, title: "Delete this part", class: "delete" %>
 		|

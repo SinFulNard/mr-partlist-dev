@@ -24,7 +24,7 @@
 				<div class="span4 part empty">
 					<strong>This project has no parts.</strong>
 			<% end %>
-				<% if current_user?(show_projects.user) %>
+				<% if current_user?(show_projects) %>
 					<p class="addButton"><i class="icon-plus-sign-alt"></i> Add part</p>
 					<div class="addField">
 			    	<%= form_for :part, action: 'new', url: parts_path do |f| %>
@@ -72,7 +72,7 @@
       <% end %>
 			</div>
 			<div class="span2">
-			<% if current_user?(show_projects.user) %>
+			<% if current_user?(show_projects) %>
 				<div id="floatRight">
 					<font color="red">
 						<i class="icon-cogs"></i>

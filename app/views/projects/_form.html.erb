@@ -40,6 +40,8 @@
     </div>
   </div>
 
+	<%= f.hidden_field :remote_ip, value: request.remote_ip %>
+
 	<% if signed_in? %>
 		<%= f.hidden_field :user_id, value: current_user.id %>
 	<% end %>

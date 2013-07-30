@@ -18,9 +18,13 @@ module SessionsHelper
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
   end
 
-  def current_user?(user)
+  def current_user?(project)
 		if signed_in?
-	    user == current_user
+	    project.user == current_user
+		else
+			if request.remote_ip == project.remote_ip && project.created_at >= 60.minutes.ago
+				true
+			end
 		end
   end
 

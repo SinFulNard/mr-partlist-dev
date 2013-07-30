@@ -1,9 +1,10 @@
 class Project < ActiveRecord::Base
-  attr_accessible :build_link, :image_link, :name, :video_link, :category_id, :user_id
+  attr_accessible :build_link, :image_link, :name, :video_link, :category_id, :user_id, :remote_ip
   before_save :test_project_links
 
   validates :name, presence: true, length: { maximum: 50 },uniqueness: { case_sensitive: false }
   validates :category_id, presence: true
+  validates :remote_ip, presence: true
   belongs_to :category
   belongs_to :user
   has_many :parts
