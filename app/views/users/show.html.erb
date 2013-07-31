@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit profile', edit_user_path(@user) %>
-
 <% if !@projects.empty? %>
-	<%= render partial: 'shared/show_projects', object: @projects %>
+	<%= render partial: 'shared/show_projects', collection: @projects %>
 <% end %>

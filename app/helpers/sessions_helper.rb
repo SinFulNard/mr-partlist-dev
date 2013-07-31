@@ -66,6 +66,15 @@ module SessionsHelper
     end
   end
 
+  def correct_project_user_destroy
+    if signed_in?
+      @project = Project.find(params[:id])
+      redirect_to(all_path) unless current_user?(@project)
+    else
+      redirect_to(root_path) unless request.remote_ip == Project.find(params[:id]).remote_ip
+    end
+  end
+
   def correct_user
     @project_owner = Project.find_by_name(params[:id]).user
     redirect_to(all_path) unless current_user?(@project_owner)
