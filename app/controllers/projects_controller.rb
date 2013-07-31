@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_filter :admin_user, only: [:index]
-  before_filter :correct_project_user, only: [:edit, :update, :destroy]
+  before_filter :correct_project_user, only: [:edit, :destroy]
+  before_filter :correct_project_user_update, only: [:update]
 
   # GET /projects
   # GET /projects.json
@@ -60,7 +61,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.json
   def update
-    @project = Project.find(params[:id])
+    @project = Project.find_by_name(params[:project][:name])
 
     respond_to do |format|
       if @project.update_attributes(params[:project])

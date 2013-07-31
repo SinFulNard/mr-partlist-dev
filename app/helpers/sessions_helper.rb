@@ -50,11 +50,20 @@ module SessionsHelper
 
   def correct_project_user
 		if signed_in?
-	    @project_owner = Project.find(params[:id]).user
-	    redirect_to(all_path) unless current_user?(@project_owner)
+	    @project = Project.find_by_name(params[:id])
+	    redirect_to(all_path) unless current_user?(@project)
 		else
       redirect_to(root_path) unless request.remote_ip == Project.find_by_name(params[:id]).remote_ip
 		end
+  end
+
+  def correct_project_user_update
+    if signed_in?
+      @project = Project.find_by_name(params[:project][:name])
+      redirect_to(all_path) unless current_user?(@project)
+    else
+      redirect_to(root_path) unless request.remote_ip == Project.find_by_name(params[:id]).remote_ip
+    end
   end
 
   def correct_user
@@ -64,8 +73,8 @@ module SessionsHelper
 
   def correct_part_user
 		if signed_in?
-	    @part_owner = Part.find(params[:id]).project.user
-  	  redirect_to(all_path) unless current_user?(@part_owner)
+	    @part_project = Part.find(params[:id]).project
+  	  redirect_to(all_path) unless current_user?(@part_project)
 		else
 			redirect_to(root_path) unless request.remote_ip == Part.find(params[:id]).remote_ip
 		end
