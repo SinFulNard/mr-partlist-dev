@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+  before_filter :admin_user, only: [:index]
+  before_filter :correct_project_user, only: [:edit, :update, :destroy]
+
   # GET /projects
   # GET /projects.json
 

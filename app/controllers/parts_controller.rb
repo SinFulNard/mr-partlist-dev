@@ -1,4 +1,7 @@
 class PartsController < ApplicationController
+  before_filter :admin_user, only: [:index]
+  before_filter :correct_part_user, only: [:edit]
+
   # GET /parts
   # GET /parts.json
   def index

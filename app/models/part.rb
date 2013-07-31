@@ -1,5 +1,5 @@
 class Part < ActiveRecord::Base
-  attr_accessible :cost, :link, :name, :project_id, :quantity
+  attr_accessible :cost, :link, :name, :project_id, :quantity, :remote_ip
   before_save :test_part_link
 
 	belongs_to :project

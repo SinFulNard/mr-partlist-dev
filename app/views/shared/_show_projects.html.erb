@@ -36,6 +36,7 @@
 			   	 		<%= f.number_field :quantity, placeholder: "Quantity" %>
               <br>
 			   	 		<%= f.hidden_field :project_id, value: show_projects.id %>
+							<%= f.hidden_field :remote_ip, value: request.remote_ip %>
 			  	 		<%= f.submit "Add", class: "btn-mini" %>
 				  	<% end %>
 					</div>
